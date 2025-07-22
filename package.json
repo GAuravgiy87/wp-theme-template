@@ -1,0 +1,63 @@
+{
+	"name": "themeslug",
+	"version": "0.2.0",
+	"private": true,
+	"description": "",
+	"keywords": [],
+	"homepage": "",
+	"bugs": {},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"license": "GPL-2.0-or-later",
+	"author": "",
+	"type": "module",
+	"main": "",
+	"scripts": {
+		"build": "wp-scripts build && npm run clean-build-css && npm run css && npm run svgo",
+		"clean-build-css": "rimraf build-css && mkdir -p build-css",
+		"css": "postcss src/styles/global.css --dir build-css",
+		"css:watch": "postcss src/styles/global.css --dir build-css --watch",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"lint": "npm run lint:css",
+		"lint:css": "stylelint --formatter verbose \"**/*.css\"",
+		"lint:css:fix": "npm run lint:css -- --fix",
+		"lint:fix": "npm run lint:css:fix",
+		"prepare": "husky",
+		"start": "concurrently \"wp-scripts start\" \"npm run css:watch\"",
+		"svgo": "svgo -f assets/svg"
+	},
+	"lint-staged": {
+		"*.css": [
+			"stylelint",
+			"prettier --write"
+		],
+		"!(*.css)": [
+			"prettier --write --ignore-unknown"
+		]
+	},
+	"devDependencies": {
+		"@wordpress/icons": "10.26.0",
+		"@wordpress/scripts": "30.19.0",
+		"concurrently": "9.2.0",
+		"husky": "9.1.7",
+		"lint-staged": "16.1.2",
+		"postcss": "8.5.6",
+		"postcss-cli": "11.0.1",
+		"postcss-custom-media": "11.0.6",
+		"postcss-discard-comments": "7.0.4",
+		"postcss-import": "16.1.1",
+		"postcss-import-ext-glob": "2.1.1",
+		"postcss-nesting": "13.0.2",
+		"prettier": "3.6.2",
+		"rimraf": "6.0.1",
+		"stylelint": "16.22.0",
+		"stylelint-config-recess-order": "7.1.0",
+		"stylelint-config-standard": "38.0.0",
+		"stylelint-order": "7.0.0",
+		"stylelint-plugin-defensive-css": "1.0.4",
+		"svgo": "4.0.0"
+	}
+}
